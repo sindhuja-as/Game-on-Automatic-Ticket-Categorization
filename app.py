@@ -93,17 +93,7 @@ elif st.session_state.page == "Dashboard":
         st.warning("Database not found. Initializing database...")
     else:
         conn = sqlite3.connect("DB_PATH")
-        
-        st.sidebar.write(f"App thinks DB is here: {DB_PATH.resolve()}")
-        st.sidebar.write(f"Does it actually exist? {DB_PATH.exists()}")
-
-        
-
-        
-        cursor = conn.cursor()
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-        print("Tables:", cursor.fetchall())
-        
+        cursor = conn.cursor()              
         df = pd.read_sql("SELECT * FROM tickets", conn)
         conn.close()
 
